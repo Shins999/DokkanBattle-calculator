@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DokkanBattle 実数値計算</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>ドッカンバトル 実数値計算</h1>
+    </header>
+
+    <main>
+        <div class="status">
+            <p>ステータス</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input NumericalValue" data-key="Status" value="0">
+            </form>
+        </div>
+        <div class="status">
+            <p>リーダースキル</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="LeaderSkill" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>足し算パッシブ</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="AdditionPassive" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>掛け算パッシブ</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="MultiplicationPassive" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>リンクスキル</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="LinkSkill" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>気力ボーナス</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Magnification" data-key="maxVitalityBonus" value="1">
+            </form>
+        </div>
+        <div class="status">
+            <p>追撃必殺気力ボーナス</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Magnification" data-key="minVitalityBonus" value="1">
+            </form>
+        </div>
+        <div class="status">
+            <p>必殺技威力</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Magnification" data-key="SuperSpecialMove" value="1">
+            </form>
+        </div>
+        <div class="status">
+            <p>追撃必殺技威力</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Magnification" data-key="StandardSpecialMove" value="1">
+            </form>
+        </div>
+        <div class="status">
+            <p>必殺技追加効果補正(累積)</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Magnification" data-key="SpecialMoveAdjustment" value="0">
+            </form>
+        </div>
+        <div class="status">
+            <p>超必殺技ATK追加効果</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Magnification" data-key="StandardSpecialAdditionalEffect"
+                    value="0">
+            </form>
+        </div>
+        <div class="status">
+            <p>通常必殺技ATK追加効果</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Magnification" data-key="SuperSpecialMoveAdditionalEffect"
+                    value="0">
+            </form>
+        </div>
+        <div class="status">
+            <p>アクティブ・スタンバイスキル</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="ActionSkill" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>フィールドスキル</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="FieldSkill" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>サポートメモリー</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="SupportMemory" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>サポートアイテム</p>
+            <form onsubmit="return false;">
+                <input type="number" class="status-input Percent" data-key="SupportItem" value="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status">
+            <p>必殺追撃数</p>
+            <form onsubmit="return false;" onsubmit="return false;">
+                <input type="number" class="status-input" data-key="FollowUpCount" value="0">
+            </form>
+        </div>
+        <div>
+            <p>実数値: <span id="values">0</span></p>
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
