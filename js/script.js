@@ -116,7 +116,8 @@ function calculateFinal() {
         const finalValue = Status * LeaderSkill * AdditionPassive * MultiplicationPassive * LinkSkill *
             VitalityBonus * finalSpecialMoveAdjustment * ActionSkill * FieldSkill *
             SupportMemory * SupportItem;
-        finalValues.push(finalValue);
+        const rounded = Math.round(finalValue);
+        finalValues.push(rounded);
     }
 
     finalOutput.textContent = finalValues.join(", ")
