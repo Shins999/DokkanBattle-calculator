@@ -14,6 +14,11 @@
     </header>
 
     <main>
+        <select id="statusSelector">
+            <option>ATK</option>
+            <option>DEF</option>
+        </select>
+
         <div class="status">
             <p>ステータス</p>
             <form onsubmit="return false;">
@@ -48,47 +53,58 @@
             </form>
             <p>%</p>
         </div>
-        <div class="status">
+        <div class="status" data-hide="DEF">
             <p>気力ボーナス</p>
             <form onsubmit="return false;">
                 <input type="number" class="status-input Magnification" data-key="maxVitalityBonus" value="1" min="1">
             </form>
+            <p>倍分</p>
         </div>
-        <div class="status">
+        <div class="status" data-hide="DEF">
             <p>追撃必殺気力ボーナス</p>
             <form onsubmit="return false;">
                 <input type="number" class="status-input Magnification" data-key="minVitalityBonus" value="1" min="1">
             </form>
+            <p>倍</p>
         </div>
-        <div class="status">
+        <div class="status" data-hide="DEF">
             <p>必殺技威力</p>
             <form onsubmit="return false;">
                 <input type="number" class="status-input Magnification" data-key="SuperSpecialMove" value="1" min="1">
             </form>
+            <p>倍</p>
         </div>
-        <div class="status">
+        <div class="status" data-hide="DEF">
             <p>追撃必殺技威力</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="StandardSpecialMove" value="1" min="1">
+                <input type="number" class="status-input Magnification" data-key="StandardSpecialMove" value="1"
+                    min="1">
             </form>
+            <p>倍</p>
         </div>
         <div class="status">
             <p>必殺技追加効果補正(累積)</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="SpecialMoveAdjustment" value="0" min="0">
+                <input type="number" class="status-input Magnification" data-key="SpecialMoveAdjustment" value="0"
+                    min="0">
             </form>
+            <p>倍分</p>
         </div>
-        <div class="status">
+        <div class="status" data-hide="DEF">
             <p>超必殺技ATK追加効果</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="StandardSpecialAdditionalEffect" value="0" min="0">
+                <input type="number" class="status-input Magnification" data-key="StandardSpecialAdditionalEffect"
+                    value="0" min="0">
             </form>
+            <p>倍分</p>
         </div>
-        <div class="status">
+        <div class="status" data-hide="DEF">
             <p>通常必殺技ATK追加効果</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="SuperSpecialMoveAdditionalEffect" value="0"  min="0">
+                <input type="number" class="status-input Magnification" data-key="SuperSpecialMoveAdditionalEffect"
+                    value="0" min="0">
             </form>
+            <p>倍分</p>
         </div>
         <div class="status">
             <p>アクティブ・スタンバイスキル</p>
@@ -118,11 +134,12 @@
             </form>
             <p>%</p>
         </div>
-        <div class="status">
+        <div class="status" data-hide="DEF">
             <p>必殺追撃数</p>
             <form onsubmit="return false;" onsubmit="return false;">
                 <input type="number" class="status-input" data-key="FollowUpCount" value="0" min="0">
             </form>
+            <p>回</p>
         </div>
         <div>
             <p>実数値: <span id="values" class="big">0</span></p>

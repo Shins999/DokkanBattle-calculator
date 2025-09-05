@@ -1,5 +1,8 @@
 const inputs = document.querySelectorAll(".status input");
 
+const selector = document.getElementById("statusSelector");
+const allStatusDivs = document.querySelectorAll(".status");
+
 let maxVitalityBonus = 0;
 let minVitalityBonus = 0;
 let SuperSpecialMove = 0;
@@ -23,6 +26,18 @@ let FollowUpCount = 0;
 let finalValues = [];
 
 const finalOutput = document.getElementById("values");
+
+selector.addEventListener("change", () => {
+    const selected = selector.value;
+
+    allStatusDivs.forEach(div => {
+        if (div.dataset.hide === selected) {
+            div.classList.add("hidden");
+        } else {
+            div.classList.remove("hidden");
+        }
+    });
+});
 
 function calculateFinal() {
     Status = 0;
@@ -116,6 +131,7 @@ function calculateFinal() {
         const finalValue = Status * LeaderSkill * AdditionPassive * MultiplicationPassive * LinkSkill *
             VitalityBonus * finalSpecialMoveAdjustment * ActionSkill * FieldSkill *
             SupportMemory * SupportItem;
+
         const rounded = Math.round(finalValue);
         finalValues.push(rounded);
     }
