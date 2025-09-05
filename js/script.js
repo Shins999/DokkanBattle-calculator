@@ -60,7 +60,6 @@ function calculateFinal() {
         switch (key) {
             case "Status":
                 Status = val;
-                console.log(val, Status);
                 break;
             case "LeaderSkill":
                 LeaderSkill += val / 100;
@@ -124,10 +123,6 @@ function calculateFinal() {
             finalSpecialMoveAdjustment = StandardSpecialMove + SpecialMoveAdjustment;
         }
 
-        console.log(Status, LeaderSkill, AdditionPassive, MultiplicationPassive, LinkSkill,
-            VitalityBonus, finalSpecialMoveAdjustment, ActionSkill, FieldSkill,
-            SupportMemory, SupportItem);
-
         const finalValue = Status * LeaderSkill * AdditionPassive * MultiplicationPassive * LinkSkill *
             VitalityBonus * finalSpecialMoveAdjustment * ActionSkill * FieldSkill *
             SupportMemory * SupportItem;
@@ -137,7 +132,6 @@ function calculateFinal() {
     }
 
     finalOutput.textContent = finalValues.join(", ")
-    console.log(finalValues);
 }
 
 inputs.forEach(input => input.addEventListener("input", calculateFinal));
