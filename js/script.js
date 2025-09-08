@@ -1,7 +1,7 @@
 const inputs = document.querySelectorAll(".status input");
 
 const selector = document.getElementById("statusSelector");
-const allStatusDivs = document.querySelectorAll(".status");
+const allStatusDivs = document.querySelectorAll("[data-hide]");
 
 let maxVitalityBonus = 0;
 let minVitalityBonus = 0;
@@ -27,7 +27,7 @@ let finalValues = [];
 
 const finalOutput = document.getElementById("values");
 
-selector.addEventListener("change", () => {
+function updateVisibility() {
     const selected = selector.value;
 
     allStatusDivs.forEach(div => {
@@ -37,6 +37,52 @@ selector.addEventListener("change", () => {
             div.classList.remove("hidden");
         }
     });
+}
+
+updateVisibility();
+
+selector.addEventListener("change", () => {
+    updateVisibility();
+
+    const visibleInputs = document.querySelectorAll(`.status input:not(.hidden input)`);
+    visibleInputs.forEach(input => {
+        const key = input.dataset.key;
+        if (!key) return;
+        switch (key) {
+            case "Status":
+            case "enemyATK":
+                input.value = 0;
+                break;
+            case "LeaderSkill":
+            case "AdditionPassive":
+            case "MultiplicationPassive":
+            case "LinkSkill":
+            case "ActionSkill":
+            case "FieldSkill":
+            case "SupportMemory":
+            case "SupportItem":
+            case "reductionRate":
+                input.value = 0;
+                break;
+            case "maxVitalityBonus":
+            case "minVitalityBonus":
+            case "SuperSpecialMove":
+            case "StandardSpecialMove":
+            case "SpecialMoveAdjustment":
+            case "StandardSpecialAdditionalEffect":
+            case "SuperSpecialMoveAdditionalEffect":
+            case "FollowUpCount":
+                input.value = 0;
+                break;
+        }
+    });
+
+    const allGuard = document.getElementById("allGuard");
+    if (allGuard) allGuard.checked = false;
+    const effectiveCheckbox = document.getElementById("effectiveCheckbox");
+    if (effectiveCheckbox) effectiveCheckbox.checked = false;
+
+    calculateFinal();
 });
 
 function calculateFinal() {
@@ -123,16 +169,80 @@ function calculateFinal() {
             finalSpecialMoveAdjustment = StandardSpecialMove + SpecialMoveAdjustment;
         }
 
-        const finalValue = Status * LeaderSkill * AdditionPassive * MultiplicationPassive * LinkSkill *
+        let finalValue = Status * LeaderSkill * AdditionPassive * MultiplicationPassive * LinkSkill *
             VitalityBonus * finalSpecialMoveAdjustment * ActionSkill * FieldSkill *
             SupportMemory * SupportItem;
 
-        const rounded = Math.round(finalValue);
-        finalValues.push(rounded);
+        finalValue = Math.round(finalValue);
+        finalValues.push(finalValue);
     }
 
-    finalOutput.textContent = finalValues.join(", ")
+    finalOutput.innerHTML = finalValues.map(v => formatNumberWithUnits(v)).join(", ");
+
+    if (selector.value === "ATK") {
+        const criticalRateInput = document.getElementById("criticalRate");
+        const effectiveCheckbox = document.getElementById("effectiveCheckbox");
+        const totalDamageOutput = document.getElementById("totalDamage");
+
+        const criticalRate = Number(criticalRateInput.value) / 100;
+        const isEffective = effectiveCheckbox.checked;
+
+        let total = finalValues.reduce((a, b) => a + b, 0);
+
+        if (isEffective) {
+            total *= 1.5;
+            total *= (1 + 0.25 * criticalRate);
+        } else {
+            total *= (1 + 0.875 * criticalRate);
+        }
+
+        total = Math.round(total);
+
+        totalDamageOutput.innerHTML = formatNumberWithUnits(total);
+    }
+
+    if (selector.value === "DEF") {
+        const enemyATK = Number(document.getElementById("enemyATK").value) || 0;
+        const reductionRate = Number(document.getElementById("reductionRate").value) / 100;
+        const allGuard = document.getElementById("allGuard").checked;
+        const baseValue = finalValues.reduce((a, b) => a + b, 0); // 実数値の合計
+
+        let damage = enemyATK * (1 - reductionRate);
+
+        if (allGuard) damage *= 0.8;
+
+        damage -= baseValue;
+
+        if (allGuard) damage *= 0.5;
+
+        damage = Math.round(damage);
+
+        document.getElementById("damageTaken").innerHTML = formatNumberWithUnits(damage);
+    }
+
 }
+
+function formatNumberWithUnits(value) {
+    if (isNaN(value)) return value;
+
+    if (value >= 100000000) {
+        const oku = Math.floor(value / 100000000);
+        const man = Math.floor((value % 100000000) / 10000);
+        const remainder = value % 10000;
+
+        return `<span class="oku">${oku}</span><span class="oku">億</span>` +
+            (man > 0 ? `<span class="man">${man}</span><span class="man">万</span>` : "") +
+            (remainder > 0 ? `<span>${remainder}</span>` : "");
+    }
+    else if (value >= 10000) {
+        const man = Math.floor(value / 10000);
+        const remainder = value % 10000;
+        return `${man}<span class="unit-man">万</span>${remainder > 0 ? remainder : ""}`;
+    }
+    else {
+        return `<span>${value}</span>`;
+    }
+};
 
 inputs.forEach(input => input.addEventListener("input", calculateFinal));
 

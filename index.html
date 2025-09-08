@@ -22,7 +22,7 @@
         <div class="status">
             <p>ステータス</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input NumericalValue" data-key="Status" value="1" min="1">
+                <input type="number" class="status-input NumericalValue" data-key="Status" value="0" min="1">
             </form>
         </div>
         <div class="status">
@@ -141,8 +141,39 @@
             </form>
             <p>回</p>
         </div>
-        <div>
-            <p>実数値: <span id="values" class="big">0</span></p>
+        <div class="color">
+            <p class="left">実数値: <span id="values" class="big">0</span></p>
+        </div>
+        <div class="status" id="criticalWrapper" data-hide="DEF">
+            <p>会心発動率</p>
+            <form onsubmit="return false;">
+                <input type="number" id="criticalRate" class="Percent" value="0" min="0">
+            </form>
+            <p>%</p>
+        </div>
+        <div class="status" id="effectiveWrapper" data-hide="DEF">
+            <p>全属性効果抜群</p>
+            <label class="checkbox">
+                <input type="checkbox" id="effectiveCheckbox">
+            </label>
+        </div>
+        <div class="status" data-hide="ATK">
+            <p>敵ATK</p>
+            <form onsubmit="return false;">
+                <input type="number" class="NumbericalValue" id="enemyATK" value="0" min="0">
+            </form>
+        </div>
+        <div class="status" data-hide="ATK">
+            <p>全属性ガード</p>
+            <label class="checkbox">
+                <input type="checkbox" id="allGuard">
+            </label>
+        </div>
+        <div id="totalWrapper" data-hide="DEF" class="color">
+            <p class="left">合計ダメージ: <span id="totalDamage" class="big">0</span></p>
+        </div>
+        <div class="status" data-hide="ATK" class="color">
+            <p class="left">被ダメージ: <span id="damageTaken" class="big">0</span></p>
         </div>
     </main>
     <script src="js/script.js"></script>
