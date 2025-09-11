@@ -51,7 +51,7 @@ selector.addEventListener("change", () => {
         switch (key) {
             case "Status":
             case "enemyATK":
-                input.value = 0;
+                input.value = input.getAttribute("value")
                 break;
             case "LeaderSkill":
             case "AdditionPassive":
@@ -62,7 +62,7 @@ selector.addEventListener("change", () => {
             case "SupportMemory":
             case "SupportItem":
             case "reductionRate":
-                input.value = 0;
+                input.value = input.getAttribute("value")
                 break;
             case "maxVitalityBonus":
             case "minVitalityBonus":
@@ -72,7 +72,7 @@ selector.addEventListener("change", () => {
             case "StandardSpecialAdditionalEffect":
             case "SuperSpecialMoveAdditionalEffect":
             case "FollowUpCount":
-                input.value = 0;
+                input.value = input.getAttribute("value")
                 break;
         }
     });
