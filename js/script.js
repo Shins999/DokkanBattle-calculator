@@ -217,6 +217,7 @@ function calculateFinal() {
         if (allGuard) damage *= 0.5;
 
         damage = Math.round(damage);
+        if (damage <= 0) damage = 0
 
         document.getElementById("damageTaken").innerHTML = formatNumberWithUnits(damage);
     }
