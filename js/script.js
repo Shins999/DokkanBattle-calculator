@@ -158,6 +158,8 @@ function calculateFinal() {
         }
     });
 
+    finalOutput.innerHTML = "";
+
     for (let i = 0; i < FollowUpCount; i++) {
         if (i === 0) {
             VitalityBonus = maxVitalityBonus;
@@ -175,9 +177,9 @@ function calculateFinal() {
 
         finalValue = Math.round(finalValue);
         finalValues.push(finalValue);
-    }
 
-    finalOutput.innerHTML = finalValues.map(v => formatNumberWithUnits(v)).join(", ");
+        finalOutput.innerHTML += formatNumberWithUnits(finalValue) + (i < FollowUpCount - 1 ? ", <br>" : "");
+    }
 
     if (selector.value === "ATK") {
         const criticalRateInput = document.getElementById("criticalRate");

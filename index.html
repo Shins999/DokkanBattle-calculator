@@ -141,8 +141,9 @@
             </form>
             <p>回</p>
         </div>
-        <div class="color">
-            <p class="left">実数値: <span id="values" class="big">0</span></p>
+        <div class="main-value big-value">
+            <p class="left big">実数値: </p>
+            <p class="left"><span id="values" class="big">0</span></p>
         </div>
         <div class="status" id="criticalWrapper" data-hide="DEF">
             <p>会心発動率</p>
@@ -176,11 +177,11 @@
                 <input type="checkbox" id="allGuard">
             </label>
         </div>
-        <div id="totalWrapper" data-hide="DEF" class="color">
-            <p class="left">合計ダメージ: <span id="totalDamage" class="big">0</span></p>
+        <div id="totalWrapper" data-hide="DEF" class="big-value">
+            <p class="left big">合計ダメージ: <span id="totalDamage">0</span></p>
         </div>
-        <div class="status color" data-hide="ATK">
-            <p class="left">被ダメージ: <span id="damageTaken" class="big" min="0">0</span></p>
+        <div class="big-value" data-hide="ATK">
+            <p class="left big">被ダメージ: <span id="damageTaken" min="0">0</span></p>
         </div>
     </main>
     <script src="js/script.js"></script>
