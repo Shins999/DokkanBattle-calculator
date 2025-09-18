@@ -202,10 +202,11 @@ function calculateFinal() {
     }
 
     if (selector.value === "DEF") {
-        const enemyATK = Number(document.getElementById("enemyATK").value) || 0;
+        const enemyATK = (Number(document.getElementById("enemyATK").value) || 0) * 10000;
         const reductionRate = Number(document.getElementById("reductionRate").value) / 100;
         const allGuard = document.getElementById("allGuard").checked;
         const baseValue = finalValues.reduce((a, b) => a + b, 0); // 実数値の合計
+
 
         let damage = enemyATK * (1 - reductionRate);
 
