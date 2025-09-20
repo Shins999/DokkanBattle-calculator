@@ -19,8 +19,7 @@ let VitalityBonus = 0;
 let SpecialMoveAdjustment = 0;
 let ActionSkill = 1;
 let FieldSkill = 1;
-let SupportMemory = 1;
-let SupportItem = 1;
+let SupportMemoryItem = 1;
 let FollowUpCount = 0;
 
 let finalValues = [];
@@ -110,6 +109,9 @@ function calculateFinal() {
             case "LeaderSkill":
                 LeaderSkill += val / 100;
                 break;
+            case "FieldSkill":
+                FieldSkill += val / 100;
+                break;
             case "AdditionPassive":
                 AdditionPassive += val / 100;
                 break;
@@ -143,14 +145,11 @@ function calculateFinal() {
             case "ActionSkill":
                 ActionSkill += val / 100;
                 break;
-            case "FieldSkill":
-                FieldSkill += val / 100;
-                break;
             case "SupportMemory":
-                SupportMemory += val / 100;
+                SupportMemoryItem += val / 100;
                 break;
             case "SupportItem":
-                SupportItem += val / 100;
+                SupportMemoryItem += val / 100;
                 break;
             case "FollowUpCount":
                 FollowUpCount = 1 + val;
@@ -171,11 +170,16 @@ function calculateFinal() {
             finalSpecialMoveAdjustment = StandardSpecialMove + SpecialMoveAdjustment;
         }
 
-        let finalValue = Status * LeaderSkill * AdditionPassive * MultiplicationPassive * LinkSkill *
-            VitalityBonus * finalSpecialMoveAdjustment * ActionSkill * FieldSkill *
-            SupportMemory * SupportItem;
+        let finalValue = Math.floor(Status * LeaderSkill);
+        finalValue = Math.floor(finalValue * FieldSkill);
+        finalValue = Math.floor(finalValue * AdditionPassive);
+        finalValue = Math.floor(finalValue * MultiplicationPassive)
+        finalValue = Math.floor(finalValue * SupportMemoryItem);
+        finalValue = Math.floor(finalValue * ActionSkill);
+        finalValue = Math.floor(finalValue * LinkSkill);
+        finalValue = Math.floor(finalValue * VitalityBonus);
+        finalValue = Math.round(finalValue * finalSpecialMoveAdjustment);
 
-        finalValue = Math.round(finalValue);
         finalValues.push(finalValue);
 
         finalOutput.innerHTML += formatNumberWithUnits(finalValue) + (i < FollowUpCount - 1 ? ", <br>" : "");
