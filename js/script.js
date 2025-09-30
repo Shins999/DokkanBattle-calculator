@@ -93,19 +93,19 @@ function calculateFinal() {
                 minVitalityBonus = val;
                 break;
             case "SuperSpecialMove":
-                SuperSpecialMove = val;
+                SuperSpecialMove = val / 100;
                 break;
             case "StandardSpecialMove":
-                StandardSpecialMove = val;
+                StandardSpecialMove = val / 100;
                 break;
             case "SpecialMoveAdjustment":
-                SpecialMoveAdjustment = val;
+                SpecialMoveAdjustment = val / 100;
                 break;
             case "StandardSpecialAdditionalEffect":
-                StandardSpecialAdditionalEffect = val;
+                StandardSpecialAdditionalEffect = val / 100;
                 break;
             case "SuperSpecialMoveAdditionalEffect":
-                SuperSpecialMoveAdditionalEffect = val;
+                SuperSpecialMoveAdditionalEffect = val / 100;
                 break;
             case "ActionSkill":
                 ActionSkill = 1 + val / 100;
@@ -114,7 +114,7 @@ function calculateFinal() {
                 SupportMemoryItem = 1 + val / 100;
                 break;
             case "SupportItem":
-                SupportMemoryItem = 1 + val / 100;
+                SupportMemoryItem += val / 100;
                 break;
             case "FollowUpCount":
                 FollowUpCount = 1 + val;

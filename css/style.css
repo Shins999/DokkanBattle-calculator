@@ -24,11 +24,11 @@ input::-webkit-inner-spin-button {
 }
 
 .NumericalValue {
-    width: 42px;
+    width: 50px;
 }
 
 .Percent {
-    width: 25px;
+    width: 33px;
 }
 
 .Magnification {
