@@ -14,174 +14,235 @@
     </header>
 
     <main>
-        <select id="statusSelector">
-            <option>ATK</option>
-            <option>DEF</option>
-        </select>
+        <button id="openSaveModal">セーブ/ロード</button>
+        <div id="saveModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>セーブスロット</h2>
+                <div class="slots">
+                    <!-- 5つのセーブスロット -->
+                    <div class="slot" data-slot-index="0">
+                        <input type="text" class="slot-name" value="Slot 1">
+                        <div class="slot-buttons">
+                            <button class="save-btn">セーブ</button>
+                            <button class="load-btn">ロード</button>
+                        </div>
+                    </div>
+                    <div class="slot" data-slot-index="1">
+                        <input type="text" class="slot-name" value="Slot 2">
+                        <div class="slot-buttons">
+                            <button class="save-btn">セーブ</button>
+                            <button class="load-btn">ロード</button>
+                        </div>
+                    </div>
+                    <div class="slot" data-slot-index="2">
+                        <input type="text" class="slot-name" value="Slot 3">
+                        <div class="slot-buttons">
+                            <button class="save-btn">セーブ</button>
+                            <button class="load-btn">ロード</button>
+                        </div>
+                    </div>
+                    <div class="slot" data-slot-index="3">
+                        <input type="text" class="slot-name" value="Slot 4">
+                        <div class="slot-buttons">
+                            <button class="save-btn">セーブ</button>
+                            <button class="load-btn">ロード</button>
+                        </div>
+                    </div>
+                    <div class="slot" data-slot-index="4">
+                        <input type="text" class="slot-name" value="Slot 5">
+                        <div class="slot-buttons">
+                            <button class="save-btn">セーブ</button>
+                            <button class="load-btn">ロード</button>
+                        </div>
+                    </div>
+                </div>
+                <button id="closeSaveModal" class="close-btn">閉じる</button>
+            </div>
+        </div>
+        <div class="main-fast">
+            <select id="statusSelector">
+                <option>ATK</option>
+                <option>DEF</option>
+            </select>
+        </div>
 
         <div class="status">
-            <p>ステータス</p>
+            <p class="Sentence">ステータス</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input NumericalValue" data-key="Status" value="0" min="1">
+                <input type="number" class="status-input NumericalValue" data-key="Status" value="0" min="1"
+                    onwheel="this.blur()">
             </form>
         </div>
         <div class="status">
-            <p>リーダースキル</p>
+            <p class="Sentence">リーダースキル</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="LeaderSkill" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="LeaderSkill" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status">
-            <p>足し算パッシブ</p>
+            <p class="Sentence">足し算パッシブ</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="AdditionPassive" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="AdditionPassive" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status">
-            <p>掛け算パッシブ</p>
+            <p class="Sentence">掛け算パッシブ</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="MultiplicationPassive" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="MultiplicationPassive" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status">
-            <p>リンクスキル</p>
+            <p class="Sentence">リンクスキル</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="LinkSkill" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="LinkSkill" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status" data-hide="DEF">
-            <p>気力ボーナス</p>
+            <p class="Sentence">気力ボーナス</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="maxVitalityBonus" value="1" min="1">
+                <input type="number" class="status-input Magnification" data-key="maxVitalityBonus" value="1" min="1"
+                    onwheel="this.blur()">
             </form>
-            <p>倍分</p>
+            <p class="Sentence">倍</p>
         </div>
         <div class="status" data-hide="DEF">
-            <p>追撃必殺気力ボーナス</p>
+            <p class="Sentence">追撃必殺気力ボーナス</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="minVitalityBonus" value="1" min="1">
+                <input type="number" class="status-input Magnification" data-key="minVitalityBonus" value="1" min="1"
+                    onwheel="this.blur()">
             </form>
-            <p>倍</p>
+            <p class="Sentence">倍</p>
         </div>
         <div class="status" data-hide="DEF">
-            <p>必殺技威力</p>
+            <p class="Sentence">必殺技威力</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="SuperSpecialMove" value="1" min="1">
+                <input type="number" class="status-input Magnification" data-key="SuperSpecialMove" value="1" min="1"
+                    onwheel="this.blur()">
             </form>
-            <p>倍</p>
+            <p class="Sentence">倍</p>
         </div>
         <div class="status" data-hide="DEF">
-            <p>追撃必殺技威力</p>
+            <p class="Sentence">追撃必殺技威力</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="StandardSpecialMove" value="1"
-                    min="1">
+                <input type="number" class="status-input Magnification" data-key="StandardSpecialMove" value="1" min="1"
+                    onwheel="this.blur()">
             </form>
-            <p>倍</p>
+            <p class="Sentence">倍</p>
         </div>
         <div class="status">
-            <p>必殺技追加効果補正(累積)</p>
+            <p class="Sentence">必殺技追加効果補正(累積)</p>
             <form onsubmit="return false;">
                 <input type="number" class="status-input Magnification" data-key="SpecialMoveAdjustment" value="0"
-                    min="0">
+                    min="0" onwheel="this.blur()">
             </form>
-            <p>倍分</p>
+            <p class="Sentence">倍分</p>
         </div>
         <div class="status" data-hide="DEF">
-            <p>超必殺技ATK追加効果</p>
+            <p class="Sentence">超必殺技ATK追加効果</p>
             <form onsubmit="return false;">
                 <input type="number" class="status-input Magnification" data-key="StandardSpecialAdditionalEffect"
-                    value="0" min="0">
+                    value="0" min="0" onwheel="this.blur()">
             </form>
-            <p>倍分</p>
+            <p class="Sentence">倍分</p>
         </div>
         <div class="status" data-hide="DEF">
-            <p>通常必殺技ATK追加効果</p>
+            <p class="Sentence">通常必殺技ATK追加効果</p>
             <form onsubmit="return false;">
                 <input type="number" class="status-input Magnification" data-key="SuperSpecialMoveAdditionalEffect"
-                    value="0" min="0">
+                    value="0" min="0" onwheel="this.blur()">
             </form>
-            <p>倍分</p>
+            <p class="Sentence">倍分</p>
         </div>
         <div class="status">
-            <p>アクティブ・スタンバイスキル</p>
+            <p class="Sentence">アクティブ・スタンバイスキル</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="ActionSkill" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="ActionSkill" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status">
-            <p>フィールドスキル</p>
+            <p class="Sentence">フィールドスキル</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="FieldSkill" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="FieldSkill" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status">
-            <p>サポートメモリー</p>
+            <p class="Sentence">サポートメモリー</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="SupportMemory" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="SupportMemory" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status">
-            <p>サポートアイテム</p>
+            <p class="Sentence">サポートアイテム</p>
             <form onsubmit="return false;">
-                <input type="number" class="status-input Percent" data-key="SupportItem" value="0" min="0">
+                <input type="number" class="status-input Percent" data-key="SupportItem" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status" data-hide="DEF">
-            <p>必殺追撃数</p>
+            <p class="Sentence">必殺追撃数</p>
             <form onsubmit="return false;" onsubmit="return false;">
-                <input type="number" class="status-input Magnification" data-key="FollowUpCount" value="0" min="0">
+                <input type="number" class="status-input Magnification" data-key="FollowUpCount" value="0" min="0"
+                    onwheel="this.blur()">
             </form>
-            <p>回</p>
+            <p class="Sentence">回</p>
         </div>
-        <div class="main-value big-value">
-            <p class="left big">実数値: </p>
-            <p class="left"><span id="values" class="big">0</span></p>
+        <div class="main-value big-value big">
+            <p class="left">実数値: </p>
+            <p class="left"><span id="values">0</span></p>
         </div>
         <div class="status" id="criticalWrapper" data-hide="DEF">
-            <p>会心発動率</p>
+            <p class="Sentence">会心発動率</p>
             <form onsubmit="return false;">
-                <input type="number" id="criticalRate" class="Percent" value="0" min="0">
+                <input type="number" id="criticalRate" class="Percent" value="0" min="0" onwheel="this.blur()">
             </form>
-            <p>%</p>
+            <p class="Sentence">%</p>
         </div>
         <div class="status" id="effectiveWrapper" data-hide="DEF">
-            <p>全属性効果抜群</p>
+            <p class="Sentence">全属性効果抜群</p>
             <label class="checkbox">
-                <input type="checkbox" id="effectiveCheckbox">
+                <input type="checkbox" id="effectiveCheckbox" onwheel="this.blur()">
             </label>
         </div>
         <div class="status" data-hide="ATK">
-            <p>敵ATK</p>
+            <p class="Sentence">敵ATK</p>
             <form onsubmit="return false;">
-                <input type="number" class="NumbericalValue" id="enemyATK" value="0" min="0">
+                <input type="number" class="NumbericalValue" id="enemyATK" value="0" min="0" onwheel="this.blur()">
             </form>
             <p>万</p>
         </div>
         <div class="status" data-hide="ATK">
-            <p>ダメージ軽減率</p>
+            <p class="Sentence">ダメージ軽減率</p>
             <form onsubmit="return false;">
-                <input type="number" class="Percent" id="reductionRate" value="0" min="0">
+                <input type="number" class="Percent" id="reductionRate" value="0" min="0" onwheel="this.blur()">
             </form>
+            <p class="Sentence">%</p>
         </div>
         <div class="status" data-hide="ATK">
-            <p>全属性ガード</p>
+            <p class="Sentence">全属性ガード</p>
             <label class="checkbox">
-                <input type="checkbox" id="allGuard">
+                <input type="checkbox" id="allGuard" onwheel="this.blur()">
             </label>
         </div>
-        <div id="totalWrapper" data-hide="DEF" class="big-value">
-            <p class="left big">合計ダメージ: <span id="totalDamage">0</span></p>
+        <div id="totalWrapper" data-hide="DEF" class="big-value big">
+            <p class="left">合計ダメージ: <span id="totalDamage">0</span></p>
         </div>
-        <div class="big-value" data-hide="ATK">
-            <p class="left big">被ダメージ: <span id="damageTaken" min="0">0</span></p>
+        <div class="big-value big" data-hide="ATK">
+            <p class="left">被ダメージ: <span id="damageTaken" min="0">0</span></p>
         </div>
     </main>
     <script src="js/script.js"></script>

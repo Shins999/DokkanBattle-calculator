@@ -3,10 +3,10 @@ const inputs = document.querySelectorAll(".status input");
 const selector = document.getElementById("statusSelector");
 const allStatusDivs = document.querySelectorAll("[data-hide]");
 
-let maxVitalityBonus = 0;
-let minVitalityBonus = 0;
-let SuperSpecialMove = 0;
-let StandardSpecialMove = 0;
+let maxVitalityBonus = 1;
+let minVitalityBonus = 1;
+let SuperSpecialMove = 1;
+let StandardSpecialMove = 1;
 let StandardSpecialAdditionalEffect = 0;
 let SuperSpecialMoveAdditionalEffect = 0;
 
@@ -14,12 +14,12 @@ let Status = 0;
 let LeaderSkill = 1;
 let AdditionPassive = 1;
 let MultiplicationPassive = 1;
-let LinkSkill = 1;
+let LinkSkill = 0;
 let VitalityBonus = 0;
 let SpecialMoveAdjustment = 0;
-let ActionSkill = 1;
-let FieldSkill = 1;
-let SupportMemoryItem = 1;
+let ActionSkill = 0;
+let FieldSkill = 0;
+let SupportMemoryItem = 0;
 let FollowUpCount = 0;
 
 let finalValues = [];
@@ -32,6 +32,14 @@ function updateVisibility() {
     allStatusDivs.forEach(div => {
         if (div.dataset.hide === selected) {
             div.classList.add("hidden");
+
+            const inputs = div.querySelectorAll("input");
+            inputs.forEach(input => {
+                input.value = input.getAttribute("value");
+            })
+
+            const checkboxes = div.querySelectorAll("input[type=checkbox]");
+            checkboxes.forEach(cb => cb.checked = false);
         } else {
             div.classList.remove("hidden");
         }
@@ -41,40 +49,8 @@ function updateVisibility() {
 updateVisibility();
 
 selector.addEventListener("change", () => {
+    reset();
     updateVisibility();
-
-    const visibleInputs = document.querySelectorAll(`.status input:not(.hidden input)`);
-    visibleInputs.forEach(input => {
-        const key = input.dataset.key;
-        if (!key) return;
-        switch (key) {
-            case "Status":
-            case "enemyATK":
-                input.value = input.getAttribute("value")
-                break;
-            case "LeaderSkill":
-            case "AdditionPassive":
-            case "MultiplicationPassive":
-            case "LinkSkill":
-            case "ActionSkill":
-            case "FieldSkill":
-            case "SupportMemory":
-            case "SupportItem":
-            case "reductionRate":
-                input.value = input.getAttribute("value")
-                break;
-            case "maxVitalityBonus":
-            case "minVitalityBonus":
-            case "SuperSpecialMove":
-            case "StandardSpecialMove":
-            case "SpecialMoveAdjustment":
-            case "StandardSpecialAdditionalEffect":
-            case "SuperSpecialMoveAdditionalEffect":
-            case "FollowUpCount":
-                input.value = input.getAttribute("value")
-                break;
-        }
-    });
 
     const allGuard = document.getElementById("allGuard");
     if (allGuard) allGuard.checked = false;
@@ -85,18 +61,7 @@ selector.addEventListener("change", () => {
 });
 
 function calculateFinal() {
-    Status = 0;
-    LeaderSkill = 1;
-    AdditionPassive = 1;
-    MultiplicationPassive = 1;
-    LinkSkill = 1;
-    ActionSkill = 1;
-    FieldSkill = 1;
-    SupportMemory = 1;
-    SupportItem = 1;
-    SpecialMoveAdjustment = 0;
-
-    finalValues = []
+    reset();
 
     inputs.forEach(input => {
         const key = input.dataset.key;
@@ -107,19 +72,19 @@ function calculateFinal() {
                 Status = val;
                 break;
             case "LeaderSkill":
-                LeaderSkill += val / 100;
+                LeaderSkill = 1 + val / 100;
                 break;
             case "FieldSkill":
-                FieldSkill += val / 100;
+                FieldSkill = 1 + val / 100;
                 break;
             case "AdditionPassive":
-                AdditionPassive += val / 100;
+                AdditionPassive = 1 + val / 100;
                 break;
             case "MultiplicationPassive":
-                MultiplicationPassive += val / 100;
+                MultiplicationPassive = 1 + val / 100;
                 break;
             case "LinkSkill":
-                LinkSkill += val / 100;
+                LinkSkill = 1 + val / 100;
                 break;
             case "maxVitalityBonus":
                 maxVitalityBonus = val;
@@ -134,7 +99,7 @@ function calculateFinal() {
                 StandardSpecialMove = val;
                 break;
             case "SpecialMoveAdjustment":
-                SpecialMoveAdjustment += val;
+                SpecialMoveAdjustment = val;
                 break;
             case "StandardSpecialAdditionalEffect":
                 StandardSpecialAdditionalEffect = val;
@@ -143,13 +108,13 @@ function calculateFinal() {
                 SuperSpecialMoveAdditionalEffect = val;
                 break;
             case "ActionSkill":
-                ActionSkill += val / 100;
+                ActionSkill = 1 + val / 100;
                 break;
             case "SupportMemory":
-                SupportMemoryItem += val / 100;
+                SupportMemoryItem = 1 + val / 100;
                 break;
             case "SupportItem":
-                SupportMemoryItem += val / 100;
+                SupportMemoryItem = 1 + val / 100;
                 break;
             case "FollowUpCount":
                 FollowUpCount = 1 + val;
@@ -160,9 +125,12 @@ function calculateFinal() {
     finalOutput.innerHTML = "";
 
     for (let i = 0; i < FollowUpCount; i++) {
+        let finalSpecialMoveAdjustment
         if (i === 0) {
             VitalityBonus = maxVitalityBonus;
+            console.log(SpecialMoveAdjustment);
             SpecialMoveAdjustment += SuperSpecialMoveAdditionalEffect;
+            console.log(SpecialMoveAdjustment);
             finalSpecialMoveAdjustment = SuperSpecialMove + SpecialMoveAdjustment;
         } else {
             VitalityBonus = minVitalityBonus;
@@ -252,6 +220,113 @@ function formatNumberWithUnits(value) {
     }
 };
 
+function reset() {
+    maxVitalityBonus = 0;
+    minVitalityBonus = 0;
+    SuperSpecialMove = 0;
+    StandardSpecialMove = 0;
+    StandardSpecialAdditionalEffect = 0;
+    SuperSpecialMoveAdditionalEffect = 0;
+
+    Status = 0;
+    LeaderSkill = 0;
+    AdditionPassive = 0;
+    MultiplicationPassive = 0;
+    LinkSkill = 0;
+    VitalityBonus = 0;
+    SpecialMoveAdjustment = 0;
+    ActionSkill = 0;
+    FieldSkill = 0;
+    SupportMemoryItem = 0;
+    FollowUpCount = 0;
+
+    finalValues = [];
+}
+
 inputs.forEach(input => input.addEventListener("input", calculateFinal));
 
 calculateFinal();
+
+const saveSlots = [{}, {}, {}, {}, {}];
+
+function saveToSlot(slotIndex) {
+    if (slotIndex < 0 || slotIndex >= saveSlots.length) return;
+
+    const slotData = {};
+
+    // すべての input 値を保存
+    inputs.forEach(input => {
+        const key = input.dataset.key;
+        if (key) {
+            slotData[key] = input.value; // 入力されたままの文字列を保存
+        }
+    });
+
+    // セレクトの値も保存
+    slotData.selectorValue = selector.value;
+
+    saveSlots[slotIndex] = slotData;
+
+    console.log("Saved:", slotData);
+    alert(`Slot ${slotIndex + 1} にセーブしました`);
+}
+
+function loadFromSlot(slotIndex) {
+    if (slotIndex < 0 || slotIndex >= saveSlots.length) return;
+
+    const data = saveSlots[slotIndex];
+    if (!data) return;
+
+    // input を復元
+    inputs.forEach(input => {
+        const key = input.dataset.key;
+        if (key && key in data) {
+            input.value = data[key];
+        }
+    });
+
+    // セレクトを復元
+    selector.value = data.selectorValue || selector.value;
+
+    // 画面の表示・計算を更新
+    updateVisibility();
+    calculateFinal();
+
+    console.log("Loaded:", data);
+    alert(`Slot ${slotIndex + 1} をロードしました`);
+}
+
+
+const modal = document.getElementById("saveModal");
+const openModalBtn = document.getElementById("openSaveModal");
+const closeModalBtn = document.getElementById("closeSaveModal");
+
+openModalBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+});
+closeModalBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+});
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.classList.add("hidden");
+    }
+});
+
+// セーブ・ロードボタンにイベントを付ける
+document.querySelectorAll(".slot").forEach(slot => {
+    const index = Number(slot.dataset.slotIndex);
+
+    const saveBtn = slot.querySelector(".save-btn");
+    const loadBtn = slot.querySelector(".load-btn");
+
+    saveBtn.addEventListener("click", () => {
+        saveToSlot(index);
+        modal.classList.add("hidden");
+    });
+
+    loadBtn.addEventListener("click", () => {
+        loadFromSlot(index);
+        modal.classList.add("hidden");
+    });
+});
