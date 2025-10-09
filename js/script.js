@@ -243,7 +243,15 @@ function reset() {
     finalValues = [];
 }
 
-inputs.forEach(input => input.addEventListener("input", calculateFinal));
+inputs.forEach(input => {
+    // 値が変わったら計算
+    input.addEventListener("input", calculateFinal);
+
+    // クリックやTabでフォーカスしたら値を全選択
+    input.addEventListener("focus", (e) => {
+        e.target.select();
+    });
+});
 
 calculateFinal();
 
